@@ -28,8 +28,10 @@ export const articleApi = createApi({
   endpoints(build) {
     getSummary: build.query({
       query(params) {
-        return "test";
+        return `/summarize?url=${encodeURIComponent(params.articleUrl)}&length=3`;
       },
     });
   },
 });
+
+export const { useLazyGetSummaryQuery } = articleApi;

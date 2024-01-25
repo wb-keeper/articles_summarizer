@@ -1,5 +1,6 @@
 import { linkIcon } from "../assets/index.js";
 import { useState } from "react";
+import { useLazyGetSummaryQuery } from "../services/article.js";
 
 export const Demo = () => {
   const [article, setArticle] = useState({ url: "", summary: "" });
