@@ -7,6 +7,7 @@ export const Demo = () => {
   const handleSubmit = async (e) => {
     alert("Submitted");
   };
+  const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
   return (
     <section className="mt-16 w-full max-w-xl">
       <div className="flex flex-col w-full gap-2">
