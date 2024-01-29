@@ -1,16 +1,24 @@
 import { linkIcon } from "../assets/index.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLazyGetSummaryQuery } from "../services/article.js";
 
 export const Demo = () => {
+  const [allArticles, setAllArticles] = useState([]);
   const [article, setArticle] = useState({ url: "", summary: "" });
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
+  useEffect(() => {
+    const articlesFromLocalStorage = JSON.parse(
+      localStorage.getItem("article"),
+    );
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { data } = await getSummary({ articleUrl: article.url });
-    if (!data.summary) {
+    if (!data?.summary) {
       const newArticle = { ...article, summary: data.summary };
+      const updatedAllArticles = [newArticle, ...allArticles];
       setArticle(newArticle);
+      setAllArticles(updatedAllArticles);
       console.log(newArticle);
     }
   };
