@@ -10,6 +10,9 @@ export const Demo = () => {
     const articlesFromLocalStorage = JSON.parse(
       localStorage.getItem("article"),
     );
+    if (articlesFromLocalStorage) {
+      setAllArticles(articlesFromLocalStorage);
+    }
   }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +22,7 @@ export const Demo = () => {
       const updatedAllArticles = [newArticle, ...allArticles];
       setArticle(newArticle);
       setAllArticles(updatedAllArticles);
-      console.log(newArticle);
+      localStorage.setItem("articles", JSON.stringify(updatedAllArticles));
     }
   };
 
@@ -50,6 +53,7 @@ export const Demo = () => {
             ←
           </button>
         </form>
+        <div className="flex flex-col gap-1 max-h-60 overflow-y-auto"></div>
       </div>
     </section>
   );
