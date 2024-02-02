@@ -67,10 +67,16 @@ export const Demo = () => {
                   className="w-[40%] h-[40%] object-contain"
                 />
               </div>
-              <p className="flex-1 font-satoshi text-blue-50">{item.url}</p>
+              <p className="flex-1 font-satoshi text-blue-700 font-medium text-sm truncate">
+                {item.url}
+              </p>
             </div>
           ))}
         </div>
+      </div>
+      <div className="my-10 max-w-full flex justify-center items-center">
+        {isFetching ? (<img src={loader} alt="loader" className="w-20 h-20 object-contain" />) : error ? (<p className="font-inter font font-bold text-black text-center">Something went wrong <br/>
+        <span>{error?.data?.error}</span></p> )}
       </div>
     </section>
   );
