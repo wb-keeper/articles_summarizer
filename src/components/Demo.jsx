@@ -62,7 +62,7 @@ export const Demo = () => {
             >
               <div className="copy_btn">
                 <img
-                  src={"copy"}
+                  src={"../src/assets/copy.svg"}
                   alt="copy icon"
                   className="w-[40%] h-[40%] object-contain"
                 />
@@ -76,7 +76,11 @@ export const Demo = () => {
       </div>
       <div className="my-10 max-w-full flex justify-center items-center">
         {isFetching ? (
-          <img src={loader} alt="loader" className="w-20 h-20 object-contain" />
+          <img
+            src={"../src/assets/loader.svg"}
+            alt="loader"
+            className="w-20 h-20 object-contain"
+          />
         ) : error ? (
           <p className="font-inter font font-bold text-black text-center">
             Something went wrong <br />
@@ -91,7 +95,9 @@ export const Demo = () => {
                 Article <span className="blue_gradient"> Summary</span>
               </h2>
               <div className="summary_box">
-                <p>{article.summary}</p>
+                <p className="font-inter font-medium text-sm text-gray-700">
+                  {article.summary}
+                </p>
               </div>
             </div>
           )
