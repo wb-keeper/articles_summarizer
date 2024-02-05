@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLazyGetSummaryQuery } from "../services/article.js";
 
 export const Demo = () => {
+  const [copied, setCopied] = useState("");
   const [allArticles, setAllArticles] = useState([]);
   const [article, setArticle] = useState({ url: "", summary: "" });
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
@@ -25,7 +26,11 @@ export const Demo = () => {
       localStorage.setItem("articles", JSON.stringify(updatedAllArticles));
     }
   };
-
+  const handleCopy = (copyUrl) => {
+    setCopied(copyUrl);
+    navigator.clipboard.writeText(copyUrl);
+    setTimeout(() => setCopied(false), 3000);
+  };
   return (
     <section className="mt-16 w-full max-w-xl">
       <div className="flex flex-col w-full gap-2">
@@ -60,9 +65,18 @@ export const Demo = () => {
               onClick={() => setArticle(item)}
               className="link_card"
             >
-              <div className="copy_btn">
+              <div
+                className="copy_btn"
+                onClick={() => {
+                  handleCopy(item.url);
+                }}
+              >
                 <img
-                  src={"../src/assets/copy.svg"}
+                  src={
+                    copied === item.url
+                      ? "../src/assets/tick.svg"
+                      : "../src/assets/copy.svg"
+                  }
                   alt="copy icon"
                   className="w-[40%] h-[40%] object-contain"
                 />
